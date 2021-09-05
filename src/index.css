@@ -50,3 +50,7 @@ small{
     text-transform: none;
 }
 
+progress {
+    width: 800px;
+}
+

@@ -1,13 +1,13 @@
 import React, { Component, useState, useRef } from 'react'
 
 export default class Quiz extends Component {
-    state = {count: 0};
+    state = {count: 100};
 
     componentDidMount(){
         const intervalId = setInterval(() => {
             this.setState(prevState => {
                 return {
-                    count: prevState.count + 1,
+                    count: prevState.count - 1,
                 }
             })
         }, 1000)
