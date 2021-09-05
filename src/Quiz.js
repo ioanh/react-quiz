@@ -82,6 +82,7 @@ export default class Quiz extends Component {
                 <p>{this.state.question}</p>
                 <ol type="A">
                     <li onClick={this.nextQ}>{this.state.answers[0]}</li>
+                    <li onClick={this.nextQ}>{this.state.answers[1]}</li>
                 </ol>
             </div>
         </div>
