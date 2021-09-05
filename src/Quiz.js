@@ -18,12 +18,20 @@ export default class Quiz extends Component {
         clearInterval(this.intervalId)
     }
 
+    resetInt = () => {
+        this.setState(prevState => {
+            return {
+                count: 100,
+            }
+        })
+    }
+
     render() {
         return (
         <div id="wrapper">
             <div class="quiz">
                 <progress value={this.state.count} max="100"></progress>
-                <p onClick={this.cancelInt}>What is this?</p>
+                <p onClick={this.resetInt}>What is this?</p>
                 <ol type="A">
                     <li>This is the answer</li>
                 </ol>
