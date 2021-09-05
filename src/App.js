@@ -1,23 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
+import React, {useState, useRef} from 'react';
 
 function App() {
+  const questions = [{}]
+  let num = 1;
+  let [progressBar, setProgressBar] = useState('100');
+  setInterval(console.log(num += 1), 1000)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="wrapper">
+       <div class="quiz">
+           <progress value={progressBar} max="100"></progress>
+           <p>What is this?</p>
+           <ol type="A">
+               <li>This is the answer</li>
+           </ol>
+       </div>
     </div>
   );
 }
