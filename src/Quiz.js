@@ -6,9 +6,11 @@ export default class Quiz extends Component {
         question: '',
         answers: [],
     };
+
+    questionNumber = 0;
     timerInterval;
     questionInterval;
-    quizQuestions = [{question: 'What is this?', answers: ['Answer1', 'Answer2']}, {question: 'What is that?', answers: ['Answer3', 'Answer4']}]
+    quizQuestions = [{question: 'What is this?', answers: ['Answer1', 'Answer2']}, {question: 'What is that?', answers: ['Answer3', 'Answer4']}, {question: 'What is wat', answers: ['Answer5', 'Answer6']}]
 
     componentDidMount(){
         this.setState(() => {
@@ -19,10 +21,11 @@ export default class Quiz extends Component {
         })
 
         this.questionInterval = setInterval(() => {
+            this.questionNumber += 1;
             this.setState(() => {
                 return {
-                    question: this.quizQuestions[1].question,
-                    answers: this.quizQuestions[1].answers,
+                    question: this.quizQuestions[this.questionNumber].question,
+                    answers: this.quizQuestions[this.questionNumber].answers,
                     timerCount: 60
                 }
             })
@@ -35,6 +38,28 @@ export default class Quiz extends Component {
                 }
             })
         }, 1000)
+    }
+
+    nextQ = () => {
+        clearInterval(this.questionInterval)
+        this.questionNumber += 1;
+        this.setState(() => {
+            return {
+                question: this.quizQuestions[this.questionNumber].question,
+                answers: this.quizQuestions[this.questionNumber].answers,
+                timerCount: 60
+            }
+        })        
+        this.questionInterval = setInterval(() => {
+            this.questionNumber += 1;
+            this.setState(() => {
+                return {
+                    question: this.quizQuestions[this.questionNumber].question,
+                    answers: this.quizQuestions[this.questionNumber].answers,
+                    timerCount: 60
+                }
+            })
+        }, 60000)
     }
 
     cancelInt = () => {
@@ -54,9 +79,9 @@ export default class Quiz extends Component {
         <div id="wrapper">
             <div class="quiz">
                 <progress value={this.state.timerCount} max="60"></progress>
-                <p onClick={this.resetInt}>{this.state.question}</p>
+                <p>{this.state.question}</p>
                 <ol type="A">
-                    <li>{this.state.answers[0]}</li>
+                    <li onClick={this.nextQ}>{this.state.answers[0]}</li>
                 </ol>
             </div>
         </div>
