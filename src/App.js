@@ -6,7 +6,7 @@ function App() {
   const questions = [{}]
   let num = 1;
   let [progressBar, setProgressBar] = useState('100');
-  setInterval(console.log(num += 1), 1000)
+  
   return (
     <div id="wrapper">
        <div class="quiz">
