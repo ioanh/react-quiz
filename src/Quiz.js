@@ -10,7 +10,7 @@ export default class Quiz extends Component {
     questionNumber = 0;
     timerInterval;
     questionInterval;
-    quizQuestions = [{question: 'What is this?', answers: ['Answer1', 'Answer2']}, {question: 'What is that?', answers: ['Answer3', 'Answer4']}, {question: 'What is wat', answers: ['Answer5', 'Answer6']}]
+    quizQuestions = [{question: 'What does AD stand for in relation to Windows Operating Systems?', answers: ['Active Directory', 'Alternative Drive', 'Automated Database', 'Active Department']}, {question: 'The logo for Snapchat is a Bell.', answers: ['True', 'False']}, {question: 'To bypass US Munitions Export Laws, the creator of the PGP published all the source code in book form.', answers: ['True', 'False']}, {question: 'Which of these people was NOT a founder of Apple Inc?', answers:['Steve Jobs', 'Jonathan Ive', 'Ronald Wayne', 'Steve Wozniak']}, {question: 'When did the online streaming service Mixer launch?', answers:['2015', '2018', '2016', '2017']}, {question: 'Which programming language shares its name with an island in Indonesia?', answers:['C#', 'JavaScript', 'Python', 'Java']}, {question: 'According to DeMorgan Theorem, the Boolean expression (AB) is equivalent to:', answers:['A + B', 'AB + BA', 'AB', 'A + AB']}, {question: 'What was the name of the first Bulgarian personal computer?', answers:['Pravetz 82', 'Pratez 8D', 'IZOT 1030', 'IMKO-1']}, {question: 'Unix Time is defined as the number of seconds that have elapsed since when?', answers:['Midnight, January 1, 1970', 'Midnight, July 4, 1976', 'Midnight of the creater of Unix birthday', 'Midnight, July 4, 1980']}, {question: 'Lenovo acquired IBM& personal computer division, including the ThinkPad line of laptops and tablets, in what year?', answers:['2005', '1999', '2003', '1996']},]
 
     componentDidMount(){
         this.setState(() => {
@@ -83,6 +83,8 @@ export default class Quiz extends Component {
                 <ol type="A">
                     <li onClick={this.nextQ}>{this.state.answers[0]}</li>
                     <li onClick={this.nextQ}>{this.state.answers[1]}</li>
+                    <li onClick={this.nextQ}>{this.state.answers[2]}</li>
+                    <li onClick={this.nextQ}>{this.state.answers[3]}</li>
                 </ol>
             </div>
         </div>
