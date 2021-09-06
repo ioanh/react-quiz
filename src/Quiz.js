@@ -7,6 +7,7 @@ export default class Quiz extends Component {
         answers: [],
     };
 
+    isGamePlaying = true;
     questionNumber = 0;
     timerInterval;
     questionInterval;
@@ -21,14 +22,19 @@ export default class Quiz extends Component {
         })
 
         this.questionInterval = setInterval(() => {
-            this.questionNumber += 1;
-            this.setState(() => {
-                return {
-                    question: this.quizQuestions[this.questionNumber].question,
-                    answers: this.quizQuestions[this.questionNumber].answers,
-                    timerCount: 60
-                }
-            })
+            if(this.questionNumber < 9){
+                this.questionNumber += 1;
+                this.setState(() => {
+                    return {
+                        question: this.quizQuestions[this.questionNumber].question,
+                        answers: this.quizQuestions[this.questionNumber].answers,
+                        timerCount: 60
+                    }
+                })
+            }else{
+                this.isGamePlaying = false;
+                clearInterval(this.questionInterval)
+            }
         }, 60000)
 
          this.timerInterval = setInterval(() => {
@@ -41,16 +47,8 @@ export default class Quiz extends Component {
     }
 
     nextQ = () => {
-        clearInterval(this.questionInterval)
-        this.questionNumber += 1;
-        this.setState(() => {
-            return {
-                question: this.quizQuestions[this.questionNumber].question,
-                answers: this.quizQuestions[this.questionNumber].answers,
-                timerCount: 60
-            }
-        })        
-        this.questionInterval = setInterval(() => {
+        if(this.questionNumber < 9){
+            clearInterval(this.questionInterval)
             this.questionNumber += 1;
             this.setState(() => {
                 return {
@@ -58,8 +56,22 @@ export default class Quiz extends Component {
                     answers: this.quizQuestions[this.questionNumber].answers,
                     timerCount: 60
                 }
-            })
-        }, 60000)
+            })        
+            this.questionInterval = setInterval(() => {
+                this.questionNumber += 1;
+                this.setState(() => {
+                    return {
+                        question: this.quizQuestions[this.questionNumber].question,
+                        answers: this.quizQuestions[this.questionNumber].answers,
+                        timerCount: 60
+                    }
+                })
+            }, 60000)
+        }else{
+            this.isGamePlaying = false;
+            clearInterval(this.questionInterval)
+        }
+        
     }
 
     cancelInt = () => {
@@ -75,8 +87,9 @@ export default class Quiz extends Component {
     }
 
     render() {
-        return (
-        <div id="wrapper">
+        let game;
+        if(this.isGamePlaying){
+            game =  <div id="wrapper">
             <div class="quiz">
                 <progress value={this.state.timerCount} max="60"></progress>
                 <p>{this.state.question}</p>
@@ -87,6 +100,14 @@ export default class Quiz extends Component {
                     <li onClick={this.nextQ}>{this.state.answers[3]}</li>
                 </ol>
             </div>
+        </div>
+        }else{
+            game = <div class="quiz"><p>You have finished the Quiz!<br/>Thank you for playing!</p>
+            <button class="button btn btn-primary" onClick="window.location.reload()">Reload!</button></div>
+        }
+        return (
+        <div id="wrapper">
+            {game}
         </div>
         )
     }
