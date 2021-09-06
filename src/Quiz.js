@@ -94,16 +94,18 @@ export default class Quiz extends Component {
                 <progress value={this.state.timerCount} max="60"></progress>
                 <p>{this.state.question}</p>
                 <ol type="A">
-                    <li onClick={this.nextQ}>{this.state.answers[0]}</li>
+                    {/* <li onClick={this.nextQ}>{this.state.answers[0]}</li>
                     <li onClick={this.nextQ}>{this.state.answers[1]}</li>
                     <li onClick={this.nextQ}>{this.state.answers[2]}</li>
-                    <li onClick={this.nextQ}>{this.state.answers[3]}</li>
+                    <li onClick={this.nextQ}>{this.state.answers[3]}</li> */}
+                    {this.state.answers.map((value, index) => {
+                        return <li onClick={this.nextQ} key={index}>{value}</li>
+                    })}
                 </ol>
             </div>
         </div>
         }else{
-            game = <div class="quiz"><p>You have finished the Quiz!<br/>Thank you for playing!</p>
-            <button class="button btn btn-primary" onClick="window.location.reload()">Reload!</button></div>
+            game = <div class="quiz"><p>You have finished the Quiz!<br/>Thank you for playing!</p></div>
         }
         return (
         <div id="wrapper">
